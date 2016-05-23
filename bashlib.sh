@@ -24,6 +24,9 @@ VERSION=1.0.1
 ARGSLENGTH=4
 
 
+# Pushover Values
+po_token=#
+po_user=#
 
 
 
@@ -145,12 +148,13 @@ notify() {
 }
 
 pushover() {
-	curl -s \
-  --form-string "token=azYRqy2oShRBykv4sYrqkqpruCxyzC" \
-  --form-string "user=u8AchuxyeCpJqubzNMVxhgcm84CZjq" \
+	internallog $(curl -s \
+  --form-string "token=$po_token" \
+  --form-string "user=$po_user" \
   --form-string "message=$1" \
   --form-string "title=$FILENAME" \
-  https://api.pushover.net/1/messages.json
+  https://api.pushover.net/1/messages.json)
+	log "Pushover notification processed."
 }
 
 
